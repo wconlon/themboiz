@@ -3,7 +3,7 @@ DEBUG = -g
 CFLAGS = -Wall $(DEBUG)
 
 default :
-	    $(CC) $(CFLAGS) -o server server.c; \
+	    $(CC) $(CFLAGS) -o victim victim.c; \
 		$(CC) $(CFLAGS) -o client client.c
 
 clean:

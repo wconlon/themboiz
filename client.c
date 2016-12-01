@@ -53,6 +53,7 @@ int main(int argc , char *argv[])
         write(sock, message, read_size);
     }
 */
+	printf("Success\n\n");
 	while(1) {
 		fgets(message, sizeof(message), stdin);
 		message[strlen(message)-1] = '\0';
