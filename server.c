@@ -83,10 +83,12 @@ int main(int argc , char *argv[])
         printf("Client: %s\n", reply);
     }
 */
+	memset(reply, 0, sizeof(reply));
 	while((ret=recv(csock, reply, sizeof(reply), 0)) > 0) {
 		//reply[ret] = '\0';
 		printf("Client: %s\n", reply);
 		const size_t line_size = 300;
+		char* endMesg = "END-OF-MESSAGE";
 		char* line = (char *) malloc(line_size);
 		/*
 		FILE *fp = popen(reply, "r");
@@ -98,9 +100,23 @@ int main(int argc , char *argv[])
 		while(fgets(line, line_size, file) != NULL) {
 			printf(line);
 			//need to send line by line
+			if(strlen(line) == 0)
+			{
+				strcat(line, "\n");
+			}
+			write(csock, line, strlen(line));
+			recv(csock, reply, sizeof(reply), 0);
+			reply[strlen(reply)] = '\0';
+			printf("client: %s", reply);
+			usleep(300);
+			memset(reply, 0, sizeof(reply));
 		}
+		
+		write(csock, endMesg, strlen(endMesg));
+		usleep(300);
+		printf("Waiting\n");
 		//send some terminating message
-		write(csock, line, strlen(line));
+		//write(csock, line, strlen(line));
 		free(line);
 		fclose(file);
 		//pclose(fp);

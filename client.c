@@ -56,13 +56,20 @@ int main(int argc , char *argv[])
 	while(1) {
 		fgets(message, sizeof(message), stdin);
 		message[strlen(message)-1] = '\0';
-		printf("%s\n", message);
+//		printf("%s\n", message);
 		write(sock, message, strlen(message));
 		
 		//need while loop to read all of reply until some end msg
 		read_size = read(sock, message, sizeof(message));
-		message[read_size] = '\0';
-		printf("%s\n", message);
+		while(strcmp("END-OF-MESSAGE", message) != 0)
+		{
+			message[read_size] = '\0';
+			printf("%s", message);
+			write(sock, message, strlen(message));
+			read_size = read(sock, message, sizeof(message));
+		}
+		printf("\n");
+		memset(message, 0, sizeof(message));
 	}
 
 
